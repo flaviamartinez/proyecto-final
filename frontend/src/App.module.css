@@ -1,0 +1,29 @@
+#root {
+	text-align: center;
+	height: 100vh;
+}
+
+.appContainer {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+.navbarWrapper {
+	height: 60px;
+	position: sticky;
+	top: 0;
+}
+
+.homeWrapper {
+	flex: 1;
+	justify-items: center;
+	min-height: calc(100vh - 80px - 50px);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.footerWrapper {
+	height: 50px;
+}
