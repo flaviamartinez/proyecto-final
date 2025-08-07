@@ -8,17 +8,17 @@ import styles from './App.module.css'
 function App () {
   return (
     <BrowserRouter>
-        <main className={styles.appContainer}>
-          <div className={styles.navbarWrapper}>
-            <Navbar />
-          </div>
-          <div className={styles.homeWrapper}>
-            <AppRoutes />
-          </div>
-          <div className={styles.footerWrapper}>
-            <Footer />
-          </div>
-        </main>
+      <main className={styles.appContainer}>
+        <div className={styles.navbarWrapper}>
+          <Navbar />
+        </div>
+        <div className={styles.homeWrapper}>
+          <AppRoutes />
+        </div>
+        <div>
+          <Footer />
+        </div>
+      </main>
     </BrowserRouter>
   )
 }

@@ -1,0 +1,23 @@
+.customButton {
+	border-radius: 5px;
+	border: none;
+	display: flex;
+	align-items: center;
+	gap: 3px;
+	padding: 5px;
+	background-color: #fff;
+	color: #000000;
+	text-decoration: none;
+}
+
+.customButton:hover{
+	background-color:  #fff;
+	font-weight: bold;
+	color: #000000;
+}
+
+.icon {
+	display: flex;
+	align-items: center;
+	font-size: 1.2rem;
+}

@@ -1,0 +1,38 @@
+.footer {
+	display: flex;
+	justify-content: space-between;
+	background-color:  #2d2d2d;
+	color: #fff;
+	padding: 2rem;
+}
+
+.column {
+	flex: 1;
+	min-width: 200px;
+	margin: 1rem;
+}
+
+.column h3,
+.column h4 {
+  margin-bottom: 1rem;
+}
+
+.column p {
+  margin: 0.5rem 0;
+}
+
+.socialIcons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+.socialIcons a {
+  font-size: 1.5rem;
+  color: #fff;
+  transition: color 0.3s;
+}
+
+.socialIcons a:hover {
+  color: #cccccc;
+}

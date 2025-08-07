@@ -1,0 +1,133 @@
+.homeWrapper {
+	display: flex;
+	flex-direction: column;
+}
+
+.hero {
+	display: flex;
+	justify-content: center;
+	background-image: url('../assets/img/home-img.png');
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	height: 50vh;
+	width: 100;
+}
+
+.herocontent {
+	max-width: 50%;
+	padding-top: 20px;
+}
+
+.herocontent p {
+	font-weight: lighter;
+}
+
+.products {
+	padding: 2rem;
+}
+
+.productsTitle {
+	font-weight: lighter;
+	font-size: x-large;
+}
+
+.productGrid {
+	display: flex;
+	gap: 2rem;
+	flex-wrap: wrap;
+	justify-content: center;
+	margin-top: 2rem;
+}
+
+.productsLink {
+	text-decoration: none;
+	color: #000000;
+	font-weight: lighter;
+}
+
+.discoverContainer {
+	display: flex;
+	flex-direction: column;
+}
+
+.discoverForm {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 2rem;
+	padding: 3rem;
+	background-color: #f9f9f3;
+	align-items: center;
+}
+  
+.imgContainer {
+	width: 100%;
+	max-width: 400px;
+	height: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+  
+.img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	display: block;
+	max-height: 100%;
+}
+  
+.info {
+	flex: 1;
+	min-width: 280px;
+}
+
+.title {
+	font-weight: 400;
+	font-size: large;
+}
+
+.text {
+	font-weight: 100;
+}
+  
+.formRow {
+	display: flex;
+	gap: 0.5rem;
+	align-items: stretch;
+}
+  
+.input {
+	padding: 0.6rem 1rem;
+	border: 1px solid #ccc;
+	font-size: 1rem;
+	flex: 1;
+	font-weight: 100;
+}
+  
+.button {
+	padding: 0.6rem 1.5rem;
+	font-size: 1rem;
+	background-color: #2d2d2d;
+	color: white;
+	border: none;
+	cursor: pointer;
+	white-space: nowrap;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-weight: 100;
+}
+  
+.fullWidthImage {
+	width: 100%;
+	height: 60vh;
+	overflow: hidden;
+  }
+  
+.bannerImg {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
