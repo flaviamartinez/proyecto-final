@@ -1,0 +1,88 @@
+.container {
+	display: flex;
+	min-height: 100vh;
+  }
+  
+  .imageContainer {
+	flex: 1;
+	display: none;
+  }
+  
+  .image {
+	width: 100%;
+	height: 100vh;
+	object-fit: cover;
+  }
+  
+  .formContainer {
+	flex: 1;
+	padding: 80px 60px;
+	background-color: white;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+  }
+  
+  .title {
+	font-size: 24px;
+	font-weight: 600;
+	margin-bottom: 40px;
+  }
+  
+  .inputGroup {
+	position: relative;
+	margin-bottom: 25px;
+  }
+  
+  .input {
+	width: 100%;
+	padding: 10px 40px 10px 10px;
+	border: none;
+	border-bottom: 1px solid black;
+	font-size: 16px;
+	outline: none;
+  }
+  
+  .arrow {
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 18px;
+	color: gray;
+  }
+  
+  .submitButton {
+	width: 100%;
+	background-color: black;
+	color: white;
+	padding: 12px;
+	font-size: 16px;
+	font-weight: 500;
+	border: none;
+	cursor: pointer;
+	margin-top: 20px;
+  }
+  
+  .submitButton:hover {
+	background-color: #222;
+  }
+  
+  .flexGroup {
+	display: flex;
+	gap: 10px;
+	margin-bottom: 25px;
+  }
+  
+  .flexItem {
+	flex: 1;
+	position: relative;
+  }
+  
+  /* Mostrar imagen en pantallas grandes */
+  @media (min-width: 768px) {
+	.imageContainer {
+	  display: block;
+	}
+  }
+  
