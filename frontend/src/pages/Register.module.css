@@ -1,0 +1,93 @@
+.container {
+	display: flex;
+	height: 100vh;
+}
+  
+.imageContainer {
+	flex: 1;
+	display: none;
+}
+  
+.image {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+  
+.formContainer {
+	flex: 1;
+	padding: 80px 60px;
+	background-color: #ffffff;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+  
+.title {
+	font-size: x-large;
+	font-weight: 400;
+	margin-bottom: 40px;
+}
+  
+.inputGroup {
+	position: relative;
+	margin-bottom: 25px;
+}
+  
+.input {
+	width: 100%;
+	padding: 10px 40px 10px 10px;
+	border: none;
+	border-bottom: 1px solid #000000;
+	font-size: 16px;
+	outline: none;
+}
+  
+.arrow {
+	position: absolute;
+	right: 10px;
+	top: 50%;
+	transform: translateY(-50%);
+	font-size: 18px;
+	color: #808080;
+}
+  
+.submitButton {
+	width: 100%;
+	background-color: #2d2d2d;
+	color: #ffffff;
+	padding: 12px;
+	font-size: 16px;
+	font-weight: 500;
+	border: none;
+	cursor: pointer;
+	margin-top: 20px;
+}
+  
+.submitButton:hover {
+	background-color: hsl(0, 0%, 13%);
+}
+  
+.flexGroup {
+	display: flex;
+	gap: 10px;
+	margin-bottom: 25px;
+}
+  
+.flexItem {
+	flex: 1;
+	position: relative;
+}
+  
+.errorMessage {
+	color: #ff0000;
+	margin-top: 10px;
+	font-size: 0.9rem;
+}
+
+@media (min-width: 768px) {
+	.imageContainer {
+	  display: block;
+	}
+}
+  
