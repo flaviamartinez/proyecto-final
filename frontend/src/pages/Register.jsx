@@ -13,6 +13,8 @@ const Register = () => {
     password: ''
   })
 
+  const [errorMessage, setErrorMessage] = useState('')
+
   const handleChange = async (e) => {
     setForm({ ...form, [e.target.name]: e.target.value })
   }
@@ -22,12 +24,21 @@ const Register = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+
+    setErrorMessage('')
+
+    if (!form.nombre || !form.apellidos || !form.email || !form.direccion || !form.telefono || !form.password) {
+      setErrorMessage('Todos los campos son obligatorio')
+      return
+    }
+
     const result = await register(form)
 
     if (result) {
       navigate('/profile')
     }
   }
+
   return (
     <div className={styles.container}>
       <div className={styles.imageContainer}>
@@ -39,39 +50,35 @@ const Register = () => {
       </div>
 
       <div className={styles.formContainer}>
-        <h2 className={styles.title}>Crear una cuenta</h2>
+        <h2 className={styles.title}>Registrate</h2>
         <form onSubmit={handleSubmit}>
           <div className={styles.inputGroup}>
             <input type='text' name='nombre' placeholder='Nombre' onChange={handleChange} value={form.nombre} className={styles.input} />
-            <span className={styles.arrow}>→</span>
           </div>
 
           <div className={styles.inputGroup}>
             <input type='text' name='apellidos' placeholder='Apellidos' onChange={handleChange} value={form.apellidos} className={styles.input} />
-            <span className={styles.arrow}>→</span>
           </div>
 
           <div className={styles.inputGroup}>
             <input type='email' name='email' placeholder='Email' onChange={handleChange} value={form.email} className={styles.input} />
-            <span className={styles.arrow}>→</span>
           </div>
 
           <div className={styles.inputGroup}>
             <input type='text' name='direccion' placeholder='Dirección' onChange={handleChange} value={form.direccion} className={styles.input} />
-            <span className={styles.arrow}>→</span>
           </div>
 
           <div className={styles.inputGroup}>
             <input type='text' name='telefono' placeholder='Número de contacto' onChange={handleChange} value={form.telefono} className={styles.input} />
-            <span className={styles.arrow}>→</span>
           </div>
 
           <div className={styles.inputGroup}>
             <input type='password' name='password' placeholder='Contraseña' onChange={handleChange} value={form.password} className={styles.input} />
-            <span className={styles.arrow}>→</span>
           </div>
 
           <button type='submit' className={styles.submitButton}>Crear Cuenta</button>
+
+          {errorMessage && (<p className={styles.errorMessage}>Todos los campos son obligatorios</p>)}
         </form>
       </div>
     </div>

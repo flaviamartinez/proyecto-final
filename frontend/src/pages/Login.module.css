@@ -1,98 +1,106 @@
 .container {
 	display: flex;
-	min-height: 100vh;
-  }
+	height: 100vh;
+}
   
-  .imageContainer {
+.imageContainer {
 	flex: 1;
 	display: none;
-  }
+}
   
-  .image {
+.image {
 	width: 100%;
-	height: 100vh;
+	height: 100%;
 	object-fit: cover;
-  }
+}
   
-  .formContainer {
+.formContainer {
 	flex: 1;
-	padding: 80px 60px;
-	background-color: white;
+	padding: 60px 60px;
+	background-color: #ffffff;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-  }
+}
   
-  .title {
-	font-size: 24px;
-	font-weight: 600;
+.title {
+	font-size: large;
+	font-weight: 300;
 	margin-bottom: 40px;
-  }
+}
   
-  .inputGroup {
+.inputGroup {
 	position: relative;
 	margin-bottom: 30px;
-  }
+}
   
-  .input {
+.input {
 	width: 100%;
 	padding: 10px 40px 10px 10px;
 	border: none;
-	border-bottom: 1px solid black;
+	border-bottom: 1px solid #000000;
 	font-size: 16px;
 	outline: none;
-  }
+}
   
-  .arrow {
+.arrow {
 	position: absolute;
 	right: 10px;
 	top: 50%;
 	transform: translateY(-50%);
 	font-size: 18px;
-	color: gray;
-  }
+	color: #808080;
+}
   
-  .loginButton {
+.loginButton {
 	width: 100%;
-	background-color: black;
-	color: white;
+	background-color: #2d2d2d;
+	color: #ffffff;
 	padding: 12px;
 	font-size: 16px;
-	font-weight: 500;
+	font-weight: 200;
 	border: none;
 	cursor: pointer;
 	margin-top: 10px;
-  }
+}
   
-  .loginButton:hover {
+.loginButton:hover {
 	background-color: #222;
-  }
+}
   
-  .newUserSection {
+.newUserSection {
 	margin-top: 60px;
-  }
+}
   
-  .question {
-	margin-bottom: 10px;
+.question {
+	margin-bottom: 20px;
+	font-size: medium;
 	color: #333;
-  }
+	font-weight: 300;
+}
   
-  .createButton {
+.registerButton {
 	width: 100%;
-	background-color: black;
-	color: white;
+	background-color: #2d2d2d;
+	color: #ffffff;
 	padding: 12px;
 	font-size: 16px;
 	border: none;
 	cursor: pointer;
-  }
+	font-weight: 200;
+}
   
-  .createButton:hover {
+.registerButton:hover {
 	background-color: #222;
-  }
+}
   
+.errorMessage {
+	color: #ff0000;
+	margin-top: 10px;
+	font-size: 0.9rem;
+}
 
-  @media (min-width: 768px) {
+@media (min-width: 768px) {
 	.imageContainer {
 	  display: block;
 	}

@@ -2,13 +2,14 @@ import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import styles from './Login.module.css'
 import { UserContext } from '../store/UserContext'
-import Swal from 'sweetalert2'
 
 const Login = () => {
   const [users, setUsers] = useState({
     email: '',
     password: ''
   })
+
+  const [errorMsg, setErrorMsg] = useState('')
 
   const { auth } = useContext(UserContext)
 
@@ -23,19 +24,10 @@ const Login = () => {
 
     const { email, password } = users
 
-    if (!email || !password) {
-      Swal.fire({
-        title: 'Todos los campos son obligatorios',
-        icon: 'error'
-      })
-      return
-    }
+    setErrorMsg('')
 
-    if (password.length < 6) {
-      Swal.fire({
-        title: 'Contraseña debe tener al menos 6 caracteres',
-        icon: 'error'
-      })
+    if (!email || !password) {
+      setErrorMsg('Todos los campos son obligatorios')
       return
     }
 
@@ -44,10 +36,6 @@ const Login = () => {
     if (result) {
       navigate('/profile')
     }
-    // Swal.fire({
-    //   title: 'Registro exitoso',
-    //   icon: 'success'
-    // })
 
     setUsers({ email: '', password: '' })
   }
@@ -55,6 +43,7 @@ const Login = () => {
   const handleClick = async (e) => {
     navigate('/register')
   }
+
   return (
     <div className={styles.container}>
       <div className={styles.imageContainer}>
@@ -96,11 +85,17 @@ const Login = () => {
           <button type='submit' className={styles.loginButton}>
             Ingresar
           </button>
+
+          {errorMsg && (
+            <p className={styles.errorMessage}>{errorMsg}</p>
+          )}
         </form>
 
         <div className={styles.newUserSection}>
           <p className={styles.question}>¿Eres nuevo?</p>
-          <button className={styles.createButton} onClick={handleClick}>Crear una cuenta</button>
+          <button className={styles.registerButton} onClick={handleClick}>
+            Crear una cuenta
+          </button>
         </div>
       </div>
     </div>
