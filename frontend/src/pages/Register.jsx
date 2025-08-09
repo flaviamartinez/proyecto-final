@@ -10,7 +10,8 @@ const Register = () => {
     email: '',
     direccion: '',
     telefono: '',
-    password: ''
+    password: '',
+    img_url: ''
   })
 
   const [errorMessage, setErrorMessage] = useState('')
@@ -27,7 +28,7 @@ const Register = () => {
 
     setErrorMessage('')
 
-    if (!form.nombre || !form.apellidos || !form.email || !form.direccion || !form.telefono || !form.password) {
+    if (!form.nombre || !form.apellidos || !form.email || !form.direccion || !form.telefono || !form.password || !form.img_url) {
       setErrorMessage('Todos los campos son obligatorio')
       return
     }
@@ -69,7 +70,11 @@ const Register = () => {
           </div>
 
           <div className={styles.inputGroup}>
-            <input type='text' name='telefono' placeholder='Número de contacto' onChange={handleChange} value={form.telefono} className={styles.input} />
+            <input type='tel' name='telefono' placeholder='Número de contacto' onChange={handleChange} value={form.telefono} className={styles.input} />
+          </div>
+
+          <div className={styles.inputGroup}>
+            <input type='url' name='img_url' placeholder='Foto de perfil (URL)' onChange={handleChange} value={form.img_url} className={styles.input} />
           </div>
 
           <div className={styles.inputGroup}>
@@ -78,7 +83,7 @@ const Register = () => {
 
           <button type='submit' className={styles.submitButton}>Crear Cuenta</button>
 
-          {errorMessage && (<p className={styles.errorMessage}>Todos los campos son obligatorios</p>)}
+          {errorMessage && (<p className={styles.errorMessage}>{errorMessage}</p>)}
         </form>
       </div>
     </div>

@@ -1,22 +1,14 @@
 import styles from './Home.module.css'
-import { useState, useEffect } from 'react'
+import { useEffect, useContext } from 'react'
 import { useLocation } from 'react-router-dom'
 import ProductCard from '../components/ProductCard.jsx'
+import { ProductContext } from '../store/ProductContext.jsx'
 
 const Home = () => {
-  const [products, setProducts] = useState([])
-  const getProducts = async () => {
-    try {
-      const res = await fetch('https://6892b6d4c49d24bce8682399.mockapi.io/api/products')
-      const data = await res.json()
-      return setProducts(data.slice(0, 3))
-    } catch (error) {
-      console.error(error)
-    }
-  }
+  const { products, fetchProducts } = useContext(ProductContext)
 
   useEffect(() => {
-    getProducts()
+    fetchProducts()
   }, [])
 
   const location = useLocation()
@@ -30,6 +22,7 @@ const Home = () => {
     }
   }, [location])
 
+  if (!products) return (<p>Cargando Inicio</p>)
   return (
     <main className={styles.homeWrapper}>
       <section className={styles.hero}>
