@@ -1,9 +1,11 @@
 import React, { useContext, useEffect } from 'react'
 import styles from './Profile.module.css'
 import { UserContext } from '../store/UserContext.jsx'
+import { useNavigate } from 'react-router-dom'
 
 const Profile = () => {
   const { fetchProfile, profile, logout } = useContext(UserContext)
+  const navigate = useNavigate()
 
   useEffect(() => {
     fetchProfile()
@@ -51,6 +53,8 @@ const Profile = () => {
           <span className={styles.value}>{profile.phone_number}</span>
         </div>
         <button onClick={logout} className={styles.logoutButton}>Cerrar Sesión</button>
+
+        {profile.role === 'admin' && (<button onClick={() => navigate('/products/new')} className={styles.logoutButton}>Agregar producto</button>)}
       </div>
     </div>
   )

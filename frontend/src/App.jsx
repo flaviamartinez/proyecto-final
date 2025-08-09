@@ -3,6 +3,7 @@ import AppRoutes from './routes/AppRoutes.jsx'
 import AppProviders from './store/AppProviders.jsx'
 import Navbar from './layouts/Navbar'
 import Footer from './layouts/Footer'
+import { Toaster } from 'sonner'
 
 import styles from './App.module.css'
 
@@ -21,6 +22,7 @@ function App () {
             <Footer />
           </div>
         </main>
+        <Toaster richColors position='bottom-right' />
       </AppProviders>
     </BrowserRouter>
   )

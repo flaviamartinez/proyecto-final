@@ -7,11 +7,15 @@ export const UserContext = createContext()
 const UserContextProvider = ({ children }) => {
   const [profile, setProfile] = useState(null)
   const [token, setToken] = useState(localStorage.getItem('token'))
+  const [role, setRole] = useState(localStorage.getItem('role'))
 
   const logout = () => {
     localStorage.removeItem('token')
     localStorage.removeItem('email')
+    localStorage.removeItem('role')
     setToken(null)
+    setRole(null)
+    setProfile(null)
   }
 
   const auth = async (email, password) => {
@@ -46,6 +50,8 @@ const UserContextProvider = ({ children }) => {
           }
         })
         setProfile(res.data)
+        localStorage.setItem('role', res.data.role)
+        setRole(localStorage.getItem('role'))
       } catch (error) {
         console.error(error)
       }
@@ -80,7 +86,8 @@ const UserContextProvider = ({ children }) => {
     logout,
     auth,
     fetchProfile,
-    register
+    register,
+    role
   }
 
   return <UserContext.Provider value={stateGlobal}>{children}</UserContext.Provider>

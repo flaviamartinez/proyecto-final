@@ -32,7 +32,13 @@ const AppRoutes = () => {
       />
       <Route path='/products' element={<Products />} />
       <Route path='/products/:id' element={<ProductDetail />} />
-      <Route path='/products/new' element={<NewProduct />} />
+      <Route
+        path='/products/new' element={
+          <ProtectedRoute redirectTo='/' requiredRole='admin'>
+            <NewProduct />
+          </ProtectedRoute>
+        }
+      />
       <Route path='/*' element={<NotFound />} />
     </Routes>
   )
