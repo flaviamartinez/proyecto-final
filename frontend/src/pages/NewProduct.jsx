@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react'
+import React, { useState, useContext, useEffect } from 'react'
 import styles from './NewProduct.module.css'
 import { ProductContext } from '../store/ProductContext'
 import { toast } from 'sonner'
@@ -13,7 +13,7 @@ const NewProduct = () => {
     img_url: ''
   })
 
-  const { createProduct } = useContext(ProductContext)
+  const { createProduct, categories, fetchCategories } = useContext(ProductContext)
 
   const [errorMessage, setErrorMessage] = useState('')
 
@@ -25,11 +25,13 @@ const NewProduct = () => {
     e.preventDefault()
 
     setErrorMessage('')
-    console.log('Borrando mensaje')
+
     if (!form.name || !form.description || !form.price || !form.stock || !form.category || !form.img_url) {
       setErrorMessage('Todos los campos son obligatorios')
       return
     }
+
+    console.log(form)
 
     const res = await createProduct(form)
 
@@ -47,6 +49,12 @@ const NewProduct = () => {
       toast.error('Hubo un error al crear el producto')
     }
   }
+
+  useEffect(() => {
+    fetchCategories()
+  }, [])
+
+  if (!categories) return (<p>Cargando...</p>)
 
   return (
     <div className={styles.formContainer}>
@@ -69,7 +77,19 @@ const NewProduct = () => {
         </div>
 
         <div className={styles.inputGroup}>
-          <input type='text' name='category' placeholder='Categoría' onChange={handleChange} value={form.category} className={styles.input} />
+          <select
+            name='category'
+            onChange={handleChange}
+            value={form.category}
+            className={styles.input}
+          >
+            <option value=''>Selecciona una categoría</option>
+            {categories.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.name}
+              </option>
+            ))}
+          </select>
         </div>
 
         <div className={styles.inputGroup}>

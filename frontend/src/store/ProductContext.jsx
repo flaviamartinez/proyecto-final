@@ -7,6 +7,7 @@ export const ProductContext = createContext()
 const ProductContextProvider = ({ children }) => {
   const [products, setProducts] = useState([])
   const [bestSeller, setBestSeller] = useState([])
+  const [categories, setCategories] = useState([])
 
   const createProduct = async (payload) => {
     try {
@@ -46,12 +47,24 @@ const ProductContextProvider = ({ children }) => {
     }
   }
 
+  const fetchCategories = async () => {
+    try {
+      const res = await fetch('http://localhost:3000/api/categories')
+      const data = await res.json()
+      return setCategories(data)
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
   const stateGlobal = {
     createProduct,
     fetchBestSellers,
     bestSeller,
     getProducts,
-    products
+    products,
+    fetchCategories,
+    categories
   }
 
   return <ProductContext.Provider value={stateGlobal}>{children}</ProductContext.Provider>
