@@ -6,6 +6,7 @@ export const ProductContext = createContext()
 
 const ProductContextProvider = ({ children }) => {
   const [products, setProducts] = useState([])
+  const [bestSeller, setBestSeller] = useState([])
 
   const createProduct = async (payload) => {
     try {
@@ -25,11 +26,21 @@ const ProductContextProvider = ({ children }) => {
     }
   }
 
-  const fetchProducts = async () => {
+  const fetchBestSellers = async () => {
     try {
       const res = await axios.get('https://6892b6d4c49d24bce8682399.mockapi.io/api/products')
       const data = await res.data
-      return setProducts(data.slice(0, 3))
+      return setBestSeller(data.slice(0, 3))
+    } catch (error) {
+      console.error(error)
+    }
+  }
+
+  const getProducts = async () => {
+    try {
+      const res = await fetch('https://6892b6d4c49d24bce8682399.mockapi.io/api/products')
+      const data = await res.json()
+      return setProducts(data)
     } catch (error) {
       console.error(error)
     }
@@ -37,9 +48,10 @@ const ProductContextProvider = ({ children }) => {
 
   const stateGlobal = {
     createProduct,
-    fetchProducts,
-    products,
-    setProducts
+    fetchBestSellers,
+    bestSeller,
+    getProducts,
+    products
   }
 
   return <ProductContext.Provider value={stateGlobal}>{children}</ProductContext.Provider>

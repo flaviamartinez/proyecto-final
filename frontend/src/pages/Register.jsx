@@ -5,11 +5,11 @@ import { useNavigate } from 'react-router-dom'
 
 const Register = () => {
   const [form, setForm] = useState({
-    nombre: '',
-    apellidos: '',
+    name: '',
+    last_name: '',
     email: '',
-    direccion: '',
-    telefono: '',
+    address: '',
+    phone_number: '',
     password: '',
     img_url: ''
   })
@@ -28,7 +28,7 @@ const Register = () => {
 
     setErrorMessage('')
 
-    if (!form.nombre || !form.apellidos || !form.email || !form.direccion || !form.telefono || !form.password || !form.img_url) {
+    if (!form.name || !form.last_name || !form.email || !form.address || !form.phone_number || !form.password || !form.img_url) {
       setErrorMessage('Todos los campos son obligatorio')
       return
     }
@@ -54,11 +54,11 @@ const Register = () => {
         <h2 className={styles.title}>Registrate</h2>
         <form onSubmit={handleSubmit}>
           <div className={styles.inputGroup}>
-            <input type='text' name='nombre' placeholder='Nombre' onChange={handleChange} value={form.nombre} className={styles.input} />
+            <input type='text' name='name' placeholder='Nombre' onChange={handleChange} value={form.name} className={styles.input} />
           </div>
 
           <div className={styles.inputGroup}>
-            <input type='text' name='apellidos' placeholder='Apellidos' onChange={handleChange} value={form.apellidos} className={styles.input} />
+            <input type='text' name='last_name' placeholder='Apellidos' onChange={handleChange} value={form.last_name} className={styles.input} />
           </div>
 
           <div className={styles.inputGroup}>
@@ -66,11 +66,11 @@ const Register = () => {
           </div>
 
           <div className={styles.inputGroup}>
-            <input type='text' name='direccion' placeholder='Dirección' onChange={handleChange} value={form.direccion} className={styles.input} />
+            <input type='text' name='address' placeholder='Dirección' onChange={handleChange} value={form.address} className={styles.input} />
           </div>
 
           <div className={styles.inputGroup}>
-            <input type='tel' name='telefono' placeholder='Número de contacto' onChange={handleChange} value={form.telefono} className={styles.input} />
+            <input type='tel' name='phone_number' placeholder='Número de contacto' onChange={handleChange} value={form.phone_number} className={styles.input} />
           </div>
 
           <div className={styles.inputGroup}>

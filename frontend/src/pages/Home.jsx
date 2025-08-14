@@ -5,10 +5,10 @@ import ProductCard from '../components/ProductCard.jsx'
 import { ProductContext } from '../store/ProductContext.jsx'
 
 const Home = () => {
-  const { products, fetchProducts } = useContext(ProductContext)
+  const { bestSeller, fetchBestSellers } = useContext(ProductContext)
 
   useEffect(() => {
-    fetchProducts()
+    fetchBestSellers()
   }, [])
 
   const location = useLocation()
@@ -22,7 +22,7 @@ const Home = () => {
     }
   }, [location])
 
-  if (!products) return (<p>Cargando Inicio</p>)
+  if (!bestSeller) return (<p>Cargando Inicio</p>)
   return (
     <main className={styles.homeWrapper}>
       <section className={styles.hero}>
@@ -35,9 +35,10 @@ const Home = () => {
       <section className={styles.products}>
         <p className={styles.productsTitle}>Productos destacados</p>
         <div className={styles.productGrid}>
-          {products.map((prod) => (
+          {bestSeller.map((prod) => (
             <ProductCard
               key={prod.id}
+              id={prod.id}
               title={prod.name}
               desc={prod.description}
               price={`$${prod.price}`}
