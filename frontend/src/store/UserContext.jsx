@@ -13,6 +13,7 @@ const UserContextProvider = ({ children }) => {
     localStorage.removeItem('token')
     localStorage.removeItem('email')
     localStorage.removeItem('role')
+    localStorage.removeItem('cart')
     setToken(null)
     setRole(null)
     setProfile(null)
@@ -60,7 +61,7 @@ const UserContextProvider = ({ children }) => {
 
   const register = async (payload) => {
     try {
-      const url = 'https://6892b6d4c49d24bce8682399.mockapi.io/api/register'
+      const url = 'http://localhost:3000/api/register'
       const res = await axios.post(url, payload)
       localStorage.setItem('token', res.data.token)
       localStorage.setItem('email', res.data.user.email)
