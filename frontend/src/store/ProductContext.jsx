@@ -11,9 +11,9 @@ const ProductContextProvider = ({ children }) => {
 
   const createProduct = async (payload) => {
     try {
-      const url = 'https://6892b6d4c49d24bce8682399.mockapi.io/api/products'
+      const url = 'http://localhost:3000/api/products'
       const res = await axios.post(url, payload)
-      return res.data.message
+      return res.data.id
     } catch (error) {
       if (error.response && error.response.data && error.response.data.error) {
         Swal.fire({
@@ -29,7 +29,7 @@ const ProductContextProvider = ({ children }) => {
 
   const fetchBestSellers = async () => {
     try {
-      const res = await axios.get('https://6892b6d4c49d24bce8682399.mockapi.io/api/products')
+      const res = await axios.get('http://localhost:3000/api/products')
       const data = await res.data
       return setBestSeller(data.slice(0, 3))
     } catch (error) {
@@ -39,7 +39,7 @@ const ProductContextProvider = ({ children }) => {
 
   const getProducts = async () => {
     try {
-      const res = await fetch('https://6892b6d4c49d24bce8682399.mockapi.io/api/products')
+      const res = await fetch('http://localhost:3000/api/products')
       const data = await res.json()
       return setProducts(data)
     } catch (error) {

@@ -16,10 +16,10 @@ const Products = () => {
     if (selectedCategory !== 'all') {
       updated = updated.filter(p => p.category === selectedCategory)
     }
-    console.log(order)
+
     if (order === 'asc') {
       updated = updated.sort((a, b) => a.price - b.price)
-    } else if (order === 'dec') {
+    } else if (order === 'desc') {
       updated = updated.sort((a, b) => b.price - a.price)
     }
 
@@ -59,7 +59,7 @@ const Products = () => {
             title={prod.name}
             desc={prod.description}
             price={`$${prod.price}`}
-            img={prod.image_url}
+            img={prod.img_url}
           />
         ))}
       </div>

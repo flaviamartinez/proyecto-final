@@ -8,9 +8,8 @@ const ProductDetail = () => {
   const { products, getProducts } = useContext(ProductContext)
   const { addProduct } = useContext(CartContext)
   const [qty, setQty] = useState(1)
+  const [product, setProduct] = useState(null)
   const { id } = useParams()
-
-  const product = products.find((p) => p.id === id)
 
   const navigate = useNavigate()
 
@@ -26,12 +25,16 @@ const ProductDetail = () => {
     getProducts()
   }, [])
 
+  useEffect(() => {
+    setProduct(products.find((p) => p.id === parseInt(id)))
+  }, [products])
+
   if (!product) return (<p>Cargando Producto</p>)
 
   return (
     <section className={styles.detail}>
       <div className={styles.media}>
-        <img src={product.image_url} alt={product.name} className={styles.image} />
+        <img src={product.img_url} alt={product.name} className={styles.image} />
       </div>
 
       <div className={styles.info}>
