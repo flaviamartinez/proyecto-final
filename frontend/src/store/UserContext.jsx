@@ -13,7 +13,6 @@ const UserContextProvider = ({ children }) => {
     localStorage.removeItem('token')
     localStorage.removeItem('email')
     localStorage.removeItem('role')
-    localStorage.removeItem('cart')
     setToken(null)
     setRole(null)
     setProfile(null)

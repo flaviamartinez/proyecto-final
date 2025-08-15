@@ -3,15 +3,26 @@ import { UserContext } from '../store/UserContext'
 import { useContext, useState, useEffect } from 'react'
 import styles from './Cart.module.css'
 import { useNavigate } from 'react-router-dom'
+import { toast } from 'sonner'
 
 const Cart = () => {
-  const { cart, updateQty, removeProduct } = useContext(CartContext)
+  const { cart, updateQty, removeProduct, createOrder } = useContext(CartContext)
   const [total, setTotal] = useState(0)
   const { token } = useContext(UserContext)
   const navigate = useNavigate()
   useEffect(() => {
     setTotal(cart.reduce((sum, product) => sum + (product.price * product.qty), 0))
   }, [cart])
+
+  const handleClick = async () => {
+    const id = await createOrder({ cart, user: localStorage.getItem('email') })
+
+    if (id) {
+      toast.success(`Compra realizada exitosamente. Número de compra: ${id}`)
+    } else {
+      toast.error('Hubo un error al realizar la compra')
+    }
+  }
 
   if (!token) {
     return (
@@ -42,7 +53,7 @@ const Cart = () => {
         {cart.map((it) => (
           <div key={it.id} className={`${styles.grid} ${styles.itemRow}`}>
             <div className={styles.productCell}>
-              <img src={it.image_url} alt={it.name} className={styles.thumb} />
+              <img src={it.img_url} alt={it.name} className={styles.thumb} />
               <div>
                 <div className={styles.prodName}>{it.name}</div>
               </div>
@@ -92,7 +103,7 @@ const Cart = () => {
 
         <button
           className={styles.buyBtn}
-          onClick={() => console.log('Comprar')}
+          onClick={handleClick}
         >
           Comprar
         </button>

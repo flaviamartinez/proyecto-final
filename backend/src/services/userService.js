@@ -2,7 +2,7 @@ import pool from '../../db/config.js'
 
 export const findUser = async (email) => {
   const query = {
-    text: 'SELECT email FROM users WHERE email = $1',
+    text: 'SELECT id FROM users WHERE email = $1',
     values: [email]
   }
   const response = await pool.query(query)

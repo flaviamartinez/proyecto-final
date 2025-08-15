@@ -1,11 +1,18 @@
 import React, { useContext, useEffect } from 'react'
 import styles from './Profile.module.css'
 import { UserContext } from '../store/UserContext.jsx'
+import { CartContext } from '../store/CartContext.jsx'
 import { useNavigate } from 'react-router-dom'
 
 const Profile = () => {
   const { fetchProfile, profile, logout } = useContext(UserContext)
+  const { deleteCart } = useContext(CartContext)
   const navigate = useNavigate()
+
+  const handleLogout = () => {
+    logout()
+    deleteCart()
+  }
 
   useEffect(() => {
     fetchProfile()
@@ -52,7 +59,7 @@ const Profile = () => {
           <span className={styles.label}>Número de contacto</span>
           <span className={styles.value}>{profile.phone_number}</span>
         </div>
-        <button onClick={logout} className={styles.logoutButton}>Cerrar Sesión</button>
+        <button onClick={handleLogout} className={styles.logoutButton}>Cerrar Sesión</button>
 
         {profile.rol === 'admin' && (<button onClick={() => navigate('/products/new')} className={styles.logoutButton}>Agregar producto</button>)}
       </div>
