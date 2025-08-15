@@ -1,4 +1,5 @@
 import { createContext, useState, useEffect } from 'react'
+import axios from 'axios'
 
 export const CartContext = createContext()
 
@@ -40,6 +41,17 @@ const CartContextProvider = ({ children }) => {
     })
   }
 
+  const createOrder = async (cart) => {
+    const url = 'http://localhost:3000/api/buy'
+    const response = await axios.post(url, cart)
+    return response.data.id
+  }
+
+  const deleteCart = () => {
+    localStorage.removeItem('cart')
+    setCart([])
+  }
+
   useEffect(() => {
     localStorage.setItem('cart', JSON.stringify(cart))
   }, [cart])
@@ -48,7 +60,9 @@ const CartContextProvider = ({ children }) => {
     cart,
     addProduct,
     removeProduct,
-    updateQty
+    updateQty,
+    createOrder,
+    deleteCart
   }
 
   return <CartContext.Provider value={stateGlobal}>{children}</CartContext.Provider>

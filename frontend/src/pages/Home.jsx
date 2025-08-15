@@ -42,7 +42,7 @@ const Home = () => {
               title={prod.name}
               desc={prod.description}
               price={`$${prod.price}`}
-              img={prod.image_url}
+              img={prod.img_url}
             />
           ))}
         </div>

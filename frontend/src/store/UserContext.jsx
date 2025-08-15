@@ -13,7 +13,6 @@ const UserContextProvider = ({ children }) => {
     localStorage.removeItem('token')
     localStorage.removeItem('email')
     localStorage.removeItem('role')
-    localStorage.removeItem('cart')
     setToken(null)
     setRole(null)
     setProfile(null)
@@ -21,11 +20,11 @@ const UserContextProvider = ({ children }) => {
 
   const auth = async (email, password) => {
     try {
-      const url = 'https://6892b6d4c49d24bce8682399.mockapi.io/api/login'
+      const url = 'http://localhost:3000/api/login'
       const payload = { email, password }
       const res = await axios.post(url, payload)
       localStorage.setItem('token', res.data.token)
-      localStorage.setItem('email', res.data.user.email)
+      localStorage.setItem('email', res.data.email)
       setToken(localStorage.getItem('token'))
       return true
     } catch (error) {
@@ -45,13 +44,13 @@ const UserContextProvider = ({ children }) => {
   const fetchProfile = async () => {
     if (token) {
       try {
-        const res = await axios.get('https://6892b6d4c49d24bce8682399.mockapi.io/me', {
+        const res = await axios.get('http://localhost:3000/api/me', {
           headers: {
             Authorization: `Bearer ${token}`
           }
         })
         setProfile(res.data)
-        localStorage.setItem('role', res.data.role)
+        localStorage.setItem('role', res.data.rol)
         setRole(localStorage.getItem('role'))
       } catch (error) {
         console.error(error)
@@ -64,7 +63,7 @@ const UserContextProvider = ({ children }) => {
       const url = 'http://localhost:3000/api/register'
       const res = await axios.post(url, payload)
       localStorage.setItem('token', res.data.token)
-      localStorage.setItem('email', res.data.user.email)
+      localStorage.setItem('email', res.data.email)
       setToken(localStorage.getItem('token'))
       return true
     } catch (error) {
