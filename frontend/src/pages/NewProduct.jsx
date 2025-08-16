@@ -31,10 +31,10 @@ const NewProduct = () => {
       return
     }
 
-    const id = await createProduct(form)
+    const { id, message } = await createProduct(form)
 
     if (id) {
-      toast.success(`Producto creado exitosamente. ID Producto: ${id}`)
+      toast.success(`${message}. ID Producto: ${id}`)
       setForm({
         name: '',
         description: '',

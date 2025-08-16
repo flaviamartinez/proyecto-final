@@ -4,21 +4,23 @@ import { useContext, useState, useEffect } from 'react'
 import styles from './Cart.module.css'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'sonner'
+import { formatCLP } from '../utils/formatCLP'
 
 const Cart = () => {
   const { cart, updateQty, removeProduct, createOrder } = useContext(CartContext)
   const [total, setTotal] = useState(0)
   const { token } = useContext(UserContext)
   const navigate = useNavigate()
+
   useEffect(() => {
     setTotal(cart.reduce((sum, product) => sum + (product.price * product.qty), 0))
   }, [cart])
 
   const handleClick = async () => {
-    const id = await createOrder({ cart, user: localStorage.getItem('email') })
+    const { id, message } = await createOrder({ cart, user: localStorage.getItem('email') })
 
     if (id) {
-      toast.success(`Compra realizada exitosamente. Número de compra: ${id}`)
+      toast.success(`${message}. Número de compra: ${id}`)
     } else {
       toast.error('Hubo un error al realizar la compra')
     }
@@ -59,7 +61,7 @@ const Cart = () => {
               </div>
             </div>
 
-            <div className={styles.priceCell}>{it.price}</div>
+            <div className={styles.priceCell}>{formatCLP(it.price)}</div>
 
             <div className={styles.qtyControls}>
               <button
@@ -91,7 +93,7 @@ const Cart = () => {
             </div>
 
             <div className={styles.priceCell}>
-              {Math.round(it.price * it.qty)}
+              {formatCLP(Math.round(it.price * it.qty))}
             </div>
           </div>
         ))}
@@ -99,7 +101,7 @@ const Cart = () => {
 
       <div className={styles.summary}>
         <div className={styles.totalLabel}>Total</div>
-        <div className={styles.totalValue}>{Math.round(total)}</div>
+        <div className={styles.totalValue}>{formatCLP(Math.round(total))}</div>
 
         <button
           className={styles.buyBtn}

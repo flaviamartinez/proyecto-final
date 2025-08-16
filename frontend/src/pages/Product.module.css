@@ -29,7 +29,47 @@
 
 .grid {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
 	gap: 2rem;
+	grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
 }
+
+.pagination {
+	display: flex;
+	gap: 0.5rem;
+	align-items: center;
+	justify-content: center;
+	margin-top: 1.25rem;
+	flex-wrap: wrap;
+  }
+  
+  .pageBtn,
+  .pageNumber {
+	padding: 0.4rem 0.7rem;
+	border-radius: 8px;
+	border: 1px solid #ddd;
+	background: #fff;
+	cursor: pointer;
+  }
+  
+  .pageBtn:disabled {
+	opacity: 0.5;
+	cursor: not-allowed;
+  }
+  
+  .pageList {
+	display: flex;
+	gap: 0.35rem;
+	align-items: center;
+  }
+  
+  .pageActive {
+	background: #111827;
+	color: #fff;
+	border-color: #111827;
+  }
+  
+  .pageInfo {
+	font-size: 0.9rem;
+	opacity: 0.8;
+  }
   

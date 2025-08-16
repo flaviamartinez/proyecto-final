@@ -3,6 +3,8 @@ import { ProductContext } from '../store/ProductContext'
 import styles from './ProductDetail.module.css'
 import { useParams, useNavigate } from 'react-router-dom'
 import { CartContext } from '../store/CartContext'
+import { formatCLP } from '../utils/formatCLP'
+import { toast } from 'sonner'
 
 const ProductDetail = () => {
   const { products, getProducts } = useContext(ProductContext)
@@ -15,10 +17,16 @@ const ProductDetail = () => {
 
   const dec = () => setQty(q => Math.max(1, q - 1))
   const inc = () => setQty(q => q + 1)
+
   const handleChange = (v) => {
     const n = Number(v)
     if (Number.isNaN(n)) return
     setQty(Math.max(1, Math.floor(n)))
+  }
+
+  const handleAdd = () => {
+    addProduct(product, qty)
+    toast.success('Producto agregado al carrito exitosamente')
   }
 
   useEffect(() => {
@@ -43,7 +51,7 @@ const ProductDetail = () => {
         {product.description && <p className={styles.desc}>{product.description}</p>}
 
         <div className={styles.meta}>
-          <span className={styles.price}>${product.price}</span>
+          <span className={styles.price}>{formatCLP(product.price)}</span>
         </div>
 
         <div className={styles.qtyRow} aria-label='Selector de cantidad'>
@@ -79,7 +87,7 @@ const ProductDetail = () => {
         </div>
 
         <div className={styles.actions}>
-          <button className={styles.add} onClick={() => addProduct(product, qty)}>
+          <button className={styles.add} onClick={handleAdd}>
             Agregar
           </button>
 

@@ -1,11 +1,24 @@
 import styles from './Home.module.css'
-import { useEffect, useContext } from 'react'
+import { useEffect, useContext, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import ProductCard from '../components/ProductCard.jsx'
 import { ProductContext } from '../store/ProductContext.jsx'
+import { formatCLP } from '../utils/formatCLP.js'
 
 const Home = () => {
   const { bestSeller, fetchBestSellers } = useContext(ProductContext)
+  const [message, setMessage] = useState('')
+  const [email, setEmail] = useState('')
+
+  const handleSubmit = (e) => {
+    e.preventDefault()
+    if (!email) return
+
+    setMessage('Te suscribiste al newsletter')
+    setEmail('')
+
+    setTimeout(() => setMessage(''), 3000)
+  }
 
   useEffect(() => {
     fetchBestSellers()
@@ -41,7 +54,7 @@ const Home = () => {
               id={prod.id}
               title={prod.name}
               desc={prod.description}
-              price={`$${prod.price}`}
+              price={formatCLP(prod.price)}
               img={prod.img_url}
             />
           ))}
@@ -62,14 +75,20 @@ const Home = () => {
             <p className={styles.text}>
               ¡Inscríbete para conocer nuevos productos, descuentos y más!
             </p>
-            <div className={styles.formRow}>
+            <form onSubmit={handleSubmit} className={styles.formRow}>
               <input
                 type='email'
                 placeholder='Tu Email'
                 className={styles.input}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
               />
-              <button className={styles.button}>Enviar</button>
-            </div>
+              <button type='submit' className={styles.button}>
+                Enviar
+              </button>
+            </form>
+            {message && <p className={styles.successMsg}>{message}</p>}
           </div>
         </div>
       </section>

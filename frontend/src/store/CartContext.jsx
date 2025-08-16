@@ -46,7 +46,7 @@ const CartContextProvider = ({ children }) => {
     try {
       const url = 'http://localhost:3000/api/buy'
       const { data } = await axios.post(url, cart)
-      return data.data.id
+      return { id: data.data.id, message: data.message }
     } catch (error) {
       const msg = error.response?.data?.message || 'Ocurrió un error'
       Swal.fire('Error', msg, 'error')

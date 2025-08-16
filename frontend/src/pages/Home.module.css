@@ -20,7 +20,7 @@
 }
 
 .herocontent p {
-	font-weight: lighter;
+	font-weight: 400;
 }
 
 .products {
@@ -130,4 +130,10 @@
 	height: 100%;
 	object-fit: cover;
 	display: block;
+}
+
+.successMsg {
+	margin-top: 0.75rem;
+	font-size: 1rem;
+	animation: fadeIn 0.3s ease;
 }
