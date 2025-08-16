@@ -40,7 +40,6 @@ export const createProductModel = async ({ name, description, price, category, s
 export const createOrderModel = async ({ cart, user }) => {
   const total = cart.reduce((sum, p) => sum + (p.qty * p.price), 0)
   const userId = await findUser(user)
-
   const query = {
     text: 'INSERT INTO orders (user_id, total) VALUES($1, $2) RETURNING id',
     values: [userId.id, total]
@@ -63,6 +62,5 @@ export const createOrderModel = async ({ cart, user }) => {
   }
 
   await pool.query(queryItems)
-
   return orderId
 }

@@ -8,15 +8,28 @@ export const authUser = async (req, res) => {
     const { email, password } = req.body
     const hashedPassword = await getPassword(email)
     const isPasswordValid = bcrypt.compareSync(password, hashedPassword)
+
     if (!isPasswordValid) {
-      return res.status(401).json({ message: 'No autorizado' })
+      return res.status(401).json({
+        success: false,
+        message: 'No autorizado',
+        data: null
+      })
     }
 
     const token = generateToken(email)
-    res.status(200).json({ token, email })
+
+    res.status(200).json({
+      success: true,
+      messsage: 'Usuario autenticado correctamente',
+      data: { token, user: email }
+    })
   } catch (error) {
-    console.log(error)
-    return res.status(500).json({ error: 'Error al autorizar' })
+    return res.status(500).json({
+      success: false,
+      message: 'Ocurrió un error inesperado',
+      error
+    })
   }
 }
 

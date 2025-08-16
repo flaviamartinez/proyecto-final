@@ -12,28 +12,23 @@ const ProductContextProvider = ({ children }) => {
   const createProduct = async (payload) => {
     try {
       const url = 'http://localhost:3000/api/products'
-      const res = await axios.post(url, payload)
-      return res.data.id
+      const { data } = await axios.post(url, payload)
+      return data.data.id
     } catch (error) {
-      if (error.response && error.response.data && error.response.data.error) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: error.response.data.error
-        })
-      } else {
-        console.log('Error de conexión con el servidor')
-      }
+      const msg = error.response?.data?.message || 'Ocurrió un error'
+      Swal.fire('Error', msg, 'error')
+      return false
     }
   }
 
   const fetchBestSellers = async () => {
     try {
-      const res = await axios.get('http://localhost:3000/api/products')
-      const data = await res.data
-      return setBestSeller(data.slice(0, 3))
+      const { data } = await axios.get('http://localhost:3000/api/products')
+      return setBestSeller(data.data.slice(0, 3))
     } catch (error) {
-      console.error(error)
+      const msg = error.response?.data?.message || 'Ocurrió un error'
+      Swal.fire('Error', msg, 'error')
+      return false
     }
   }
 
@@ -41,9 +36,11 @@ const ProductContextProvider = ({ children }) => {
     try {
       const res = await fetch('http://localhost:3000/api/products')
       const data = await res.json()
-      return setProducts(data)
+      return setProducts(data.data)
     } catch (error) {
-      console.error(error)
+      const msg = error.response?.data?.message || 'Ocurrió un error'
+      Swal.fire('Error', msg, 'error')
+      return false
     }
   }
 
@@ -51,9 +48,11 @@ const ProductContextProvider = ({ children }) => {
     try {
       const res = await fetch('http://localhost:3000/api/categories')
       const data = await res.json()
-      return setCategories(data)
+      return setCategories(data.data)
     } catch (error) {
-      console.error(error)
+      const msg = error.response?.data?.message || 'Ocurrió un error'
+      Swal.fire('Error', msg, 'error')
+      return false
     }
   }
 

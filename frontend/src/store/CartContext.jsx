@@ -1,5 +1,6 @@
 import { createContext, useState, useEffect } from 'react'
 import axios from 'axios'
+import Swal from 'sweetalert2'
 
 export const CartContext = createContext()
 
@@ -42,9 +43,15 @@ const CartContextProvider = ({ children }) => {
   }
 
   const createOrder = async (cart) => {
-    const url = 'http://localhost:3000/api/buy'
-    const response = await axios.post(url, cart)
-    return response.data.id
+    try {
+      const url = 'http://localhost:3000/api/buy'
+      const { data } = await axios.post(url, cart)
+      return data.data.id
+    } catch (error) {
+      const msg = error.response?.data?.message || 'Ocurrió un error'
+      Swal.fire('Error', msg, 'error')
+      return false
+    }
   }
 
   const deleteCart = () => {

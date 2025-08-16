@@ -22,21 +22,17 @@ const UserContextProvider = ({ children }) => {
     try {
       const url = 'http://localhost:3000/api/login'
       const payload = { email, password }
-      const res = await axios.post(url, payload)
-      localStorage.setItem('token', res.data.token)
-      localStorage.setItem('email', res.data.email)
-      setToken(localStorage.getItem('token'))
+      const { data } = await axios.post(url, payload)
+      const { token, user } = await data.data
+
+      localStorage.setItem('token', token)
+      localStorage.setItem('email', user)
+      setToken(token)
+
       return true
     } catch (error) {
-      if (error.response && error.response.data && error.response.data.error) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: error.response.data.error
-        })
-      } else {
-        console.log('Error de conexión con el servidor')
-      }
+      const msg = error.response?.data?.message || 'Ocurrió un error'
+      Swal.fire('Error', msg, 'error')
       return false
     }
   }
@@ -44,16 +40,18 @@ const UserContextProvider = ({ children }) => {
   const fetchProfile = async () => {
     if (token) {
       try {
-        const res = await axios.get('http://localhost:3000/api/me', {
+        const { data } = await axios.get('http://localhost:3000/api/me', {
           headers: {
             Authorization: `Bearer ${token}`
           }
         })
-        setProfile(res.data)
-        localStorage.setItem('role', res.data.rol)
+
+        setProfile(data.data)
+        localStorage.setItem('role', data.data.rol)
         setRole(localStorage.getItem('role'))
       } catch (error) {
-        console.error(error)
+        const msg = error.response?.data?.message || 'Ocurrió un error'
+        Swal.fire('Error', msg, 'error')
       }
     }
   }
@@ -61,21 +59,15 @@ const UserContextProvider = ({ children }) => {
   const register = async (payload) => {
     try {
       const url = 'http://localhost:3000/api/register'
-      const res = await axios.post(url, payload)
-      localStorage.setItem('token', res.data.token)
-      localStorage.setItem('email', res.data.email)
-      setToken(localStorage.getItem('token'))
+      const { data } = await axios.post(url, payload)
+      const { token, email } = data.data
+      localStorage.setItem('token', token)
+      localStorage.setItem('email', email)
+      setToken(token)
       return true
     } catch (error) {
-      if (error.response && error.response.data && error.response.data.error) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: error.response.data.error
-        })
-      } else {
-        console.log('Error de conexión con el servidor')
-      }
+      const msg = error.response?.data?.message || 'Ocurrió un error'
+      Swal.fire('Error', msg, 'error')
       return false
     }
   }
