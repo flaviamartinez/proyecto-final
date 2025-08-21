@@ -6,7 +6,7 @@
 .hero {
 	display: flex;
 	justify-content: center;
-	background-image: url('../public/img/home-img.png');
+	background-image: url('/img/home-img.png');
 	background-size: cover;
 	background-position: center;
 	background-repeat: no-repeat;
