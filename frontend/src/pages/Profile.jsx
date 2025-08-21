@@ -29,7 +29,7 @@ const Profile = () => {
       <div className={styles.left}>
         <div className={styles.avatar}>
           <img
-            src={profile.img_url || '/src/assets/img/default-avatar.png'}
+            src={profile.img_url || '/img/default-avatar.png'}
             alt='Foto de perfil'
             className={styles.avatarImage}
           />
