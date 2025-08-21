@@ -8,6 +8,7 @@ const UserContextProvider = ({ children }) => {
   const [profile, setProfile] = useState(null)
   const [token, setToken] = useState(localStorage.getItem('token'))
   const [role, setRole] = useState(localStorage.getItem('role'))
+  const [wishlist, setWishlist] = useState(null)
 
   const logout = () => {
     localStorage.removeItem('token')
@@ -16,11 +17,12 @@ const UserContextProvider = ({ children }) => {
     setToken(null)
     setRole(null)
     setProfile(null)
+    setWishlist([])
   }
 
   const auth = async (email, password) => {
     try {
-      const url = 'http://localhost:3000/api/login'
+      const url = 'https://proyecto-final-txuj.onrender.com/api/login'
       const payload = { email, password }
       const { data } = await axios.post(url, payload)
       const { token, user } = await data.data
@@ -40,30 +42,64 @@ const UserContextProvider = ({ children }) => {
   const fetchProfile = async () => {
     if (token) {
       try {
-        const { data } = await axios.get('http://localhost:3000/api/me', {
+        const { data } = await axios.get('https://proyecto-final-txuj.onrender.com/api/me', {
           headers: {
             Authorization: `Bearer ${token}`
           }
         })
-
-        setProfile(data.data)
-        localStorage.setItem('role', data.data.rol)
+        setProfile(data.data.user)
+        setWishlist(data.data.wishlist)
+        localStorage.setItem('role', data.data.user.rol)
         setRole(localStorage.getItem('role'))
       } catch (error) {
         const msg = error.response?.data?.message || 'Ocurrió un error'
         Swal.fire('Error', msg, 'error')
       }
+    } else {
+      setProfile(null)
+      setWishlist([])
+      setRole(null)
     }
   }
 
   const register = async (payload) => {
     try {
-      const url = 'http://localhost:3000/api/register'
+      const url = 'https://proyecto-final-txuj.onrender.com/api/register'
       const { data } = await axios.post(url, payload)
       const { token, email } = data.data
       localStorage.setItem('token', token)
       localStorage.setItem('email', email)
       setToken(token)
+      return true
+    } catch (error) {
+      const msg = error.response?.data?.message || 'Ocurrió un error'
+      Swal.fire('Error', msg, 'error')
+      return false
+    }
+  }
+
+  const addToWishlist = async (productId, userId) => {
+    try {
+      const url = 'https://proyecto-final-txuj.onrender.com/api/wishlist'
+      const payload = { productId, userId }
+      const { data } = await axios.post(url, payload)
+      setWishlist(data.data.wishlist)
+      return true
+    } catch (error) {
+      const msg = error.response?.data?.message || 'Ocurrió un error'
+      Swal.fire('Error', msg, 'error')
+      return false
+    }
+  }
+
+  const deleteFromWishlist = async (productId, userId) => {
+    try {
+      const url = 'https://proyecto-final-txuj.onrender.com/api/wishlist'
+      const payload = { productId, userId }
+      const { data } = await axios.delete(url, {
+        data: payload
+      })
+      setWishlist(data.data.wishlist)
       return true
     } catch (error) {
       const msg = error.response?.data?.message || 'Ocurrió un error'
@@ -79,7 +115,10 @@ const UserContextProvider = ({ children }) => {
     auth,
     fetchProfile,
     register,
-    role
+    role,
+    wishlist,
+    addToWishlist,
+    deleteFromWishlist
   }
 
   return <UserContext.Provider value={stateGlobal}>{children}</UserContext.Provider>

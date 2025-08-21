@@ -22,7 +22,7 @@ export const getPassword = async (email) => {
 
 export const getUserModel = async (email) => {
   const query = {
-    text: 'SELECT email, name, last_name, address, phone_number, rol, img_url FROM users WHERE email = $1',
+    text: 'SELECT id, email, name, last_name, address, phone_number, rol, img_url FROM users WHERE email = $1',
     values: [email]
   }
 

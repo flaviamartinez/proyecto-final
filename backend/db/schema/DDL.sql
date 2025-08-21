@@ -52,3 +52,11 @@ CREATE TABLE order_items (
   FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE,
   FOREIGN KEY (product_id) REFERENCES products(id)
 );
+
+CREATE TABLE wishlist_items (
+    product_id INT NOT NULL,
+    user_id INT NOT NULL,
+    PRIMARY KEY (user_id, product_id),
+    CONSTRAINT fk_product FOREIGN KEY (product_id) REFERENCES products(id),
+    CONSTRAINT fk_user FOREIGN KEY (user_id) REFERENCES users(id)
+);

@@ -4,11 +4,13 @@ import { useLocation } from 'react-router-dom'
 import ProductCard from '../components/ProductCard.jsx'
 import { ProductContext } from '../store/ProductContext.jsx'
 import { formatCLP } from '../utils/formatCLP.js'
+import { UserContext } from '../store/UserContext'
 
 const Home = () => {
   const { bestSeller, fetchBestSellers } = useContext(ProductContext)
   const [message, setMessage] = useState('')
   const [email, setEmail] = useState('')
+  const { fetchProfile, wishlist } = useContext(UserContext)
 
   const handleSubmit = (e) => {
     e.preventDefault()
@@ -22,6 +24,7 @@ const Home = () => {
 
   useEffect(() => {
     fetchBestSellers()
+    fetchProfile()
   }, [])
 
   const location = useLocation()
@@ -56,6 +59,7 @@ const Home = () => {
               desc={prod.description}
               price={formatCLP(prod.price)}
               img={prod.img_url}
+              isinWishlist={wishlist ? wishlist.some(w => w.product_id === prod.id) : false}
             />
           ))}
         </div>

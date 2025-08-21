@@ -134,4 +134,31 @@
 	  gap: 2rem;
 	}
 }
+
+.qtySection {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+}
+
+.wishlistBtn {
+	background: transparent;
+	border: none;
+	padding: 4px;
+	cursor: pointer;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+  
+.wishlistBtn.active svg {
+	transform: scale(1.05);
+	transition: transform 0.2s;
+}
+  
+@media (max-width: 480px) {
+	.qtySection {
+	  gap: 6px;
+	}
+}
   

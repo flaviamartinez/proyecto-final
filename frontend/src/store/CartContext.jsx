@@ -44,7 +44,7 @@ const CartContextProvider = ({ children }) => {
 
   const createOrder = async (cart) => {
     try {
-      const url = 'http://localhost:3000/api/buy'
+      const url = 'https://proyecto-final-txuj.onrender.com/api/buy'
       const { data } = await axios.post(url, cart)
       return { id: data.data.id, message: data.message }
     } catch (error) {

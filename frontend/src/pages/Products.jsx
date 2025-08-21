@@ -1,6 +1,7 @@
 import { useEffect, useContext, useState, useMemo } from 'react'
 import styles from './Product.module.css'
 import { ProductContext } from '../store/ProductContext.jsx'
+import { UserContext } from '../store/UserContext.jsx'
 import ProductCard from '../components/ProductCard'
 import { formatCLP } from '../utils/formatCLP.js'
 
@@ -8,6 +9,7 @@ const Products = () => {
   const { products, getProducts } = useContext(ProductContext)
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [order, setOrder] = useState('none')
+  const { wishlist, fetchProfile } = useContext(UserContext)
 
   const [page, setPage] = useState(1)
   const [pageSize, setPageSize] = useState(12)
@@ -40,6 +42,8 @@ const Products = () => {
 
   useEffect(() => {
     getProducts()
+    fetchProfile()
+    console.log(wishlist)
   }, [])
 
   useEffect(() => {
@@ -54,6 +58,7 @@ const Products = () => {
   const prev = () => setPage(p => Math.max(1, p - 1))
   const next = () => setPage(p => Math.min(totalPages, p + 1))
 
+  if (!wishlist) return (<p> Cargando...</p>)
   return (
     <div className={styles.container}>
       <div className={styles.actions}>
@@ -99,6 +104,7 @@ const Products = () => {
             desc={prod.description}
             price={formatCLP(prod.price)}
             img={prod.img_url}
+            isinWishlist={wishlist ? wishlist.some(w => w.product_id === prod.id) : false}
           />
         ))}
       </div>

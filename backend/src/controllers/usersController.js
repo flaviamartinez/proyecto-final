@@ -1,6 +1,7 @@
 import { registerModel, getUserModel } from '../models/usersModel.js'
 import camelcaseKeys from 'camelcase-keys'
 import { generateToken } from './authController.js'
+import { fetchWishlistModel } from '../models/wishlistModel.js'
 
 export const registerUser = async (req, res) => {
   try {
@@ -32,11 +33,11 @@ export const getUser = async (req, res) => {
   try {
     const email = req.user
     const user = await getUserModel(email)
-
+    const wishlist = await fetchWishlistModel(user.id)
     return res.status(200).json({
       success: true,
       message: 'Usuario obtenido correctamente',
-      data: user
+      data: { user, wishlist }
     })
   } catch (error) {
     return res.status(500).json({

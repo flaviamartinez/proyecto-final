@@ -61,4 +61,22 @@
 .button:hover {
 	background-color: #444;
 }
+
+.actions {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 8px;
+}
+  
+.wishlistButton {
+	background: transparent;
+	border: none;
+	cursor: pointer;
+}
+  
+.wishlistButton.active svg {
+	transform: scale(1.1);
+	transition: transform 0.2s;
+}
   

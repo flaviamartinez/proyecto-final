@@ -11,7 +11,7 @@ const ProductContextProvider = ({ children }) => {
 
   const createProduct = async (payload) => {
     try {
-      const url = 'http://localhost:3000/api/products'
+      const url = 'https://proyecto-final-txuj.onrender.com/api/products'
       const { data } = await axios.post(url, payload)
       return { id: data.data.id, message: data.message }
     } catch (error) {
@@ -23,7 +23,7 @@ const ProductContextProvider = ({ children }) => {
 
   const fetchBestSellers = async () => {
     try {
-      const { data } = await axios.get('http://localhost:3000/api/products')
+      const { data } = await axios.get('https://proyecto-final-txuj.onrender.com/api/products')
       return setBestSeller(data.data.slice(0, 3))
     } catch (error) {
       const msg = error.response?.data?.message || 'Ocurrió un error'
@@ -34,7 +34,7 @@ const ProductContextProvider = ({ children }) => {
 
   const getProducts = async () => {
     try {
-      const res = await fetch('http://localhost:3000/api/products')
+      const res = await fetch('https://proyecto-final-txuj.onrender.com/api/products')
       const data = await res.json()
       return setProducts(data.data)
     } catch (error) {
@@ -46,7 +46,7 @@ const ProductContextProvider = ({ children }) => {
 
   const fetchCategories = async () => {
     try {
-      const res = await fetch('http://localhost:3000/api/categories')
+      const res = await fetch('https://proyecto-final-txuj.onrender.com/api/categories')
       const data = await res.json()
       return setCategories(data.data)
     } catch (error) {
