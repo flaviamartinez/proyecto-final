@@ -48,7 +48,7 @@ const Login = () => {
     <div className={styles.container}>
       <div className={styles.imageContainer}>
         <img
-          src='/src/assets/img/login.jpg'
+          src='/src/assets/img/login.png'
           alt='Producto'
           className={styles.image}
         />

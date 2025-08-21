@@ -44,7 +44,7 @@ const Register = () => {
     <div className={styles.container}>
       <div className={styles.imageContainer}>
         <img
-          src='/src/assets/img/register.jpg'
+          src='/src/assets/img/register.png'
           alt='Hands'
           className={styles.image}
         />

@@ -68,11 +68,11 @@ const Home = () => {
 
       <section className={styles.discoverContainer}>
         <div className={styles.fullWidthImage}>
-          <img src='/src/assets/img/discover-model.jpg' alt='model' className={styles.bannerImg} />
+          <img src='/src/assets/img/discover-model.png' alt='model' className={styles.bannerImg} />
         </div>
         <div id='discover' className={styles.discoverForm}>
           <div className={styles.imgContainer}>
-            <img src='/src/assets/img/discover-form.jpg' alt='skincare' className={styles.img} />
+            <img src='/src/assets/img/discover-form.png' alt='skincare' className={styles.img} />
           </div>
           <div className={styles.info}>
             <p className={styles.title}>Inscríbete a nuestro newsletter</p>
